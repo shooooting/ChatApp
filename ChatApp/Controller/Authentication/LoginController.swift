@@ -18,18 +18,12 @@ class LoginController: UIViewController {
         return iv
     }()
     
-    private let emailContainerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .cyan
-        view.setHeight(height: 50)
-        return view
+    private lazy var emailContainerView: UIView = {
+        return InputContainerView(image: #imageLiteral(resourceName: "ic_mail_outline_white_2x"), textField: emailTextField)
     }()
     
-    private let passwordContainerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .yellow
-        view.setHeight(height: 50)
-        return view
+    private lazy var passwordContainerView: InputContainerView = {
+        return InputContainerView(image: #imageLiteral(resourceName: "ic_lock_outline_white_2x"), textField: passwordTextField)
     }()
     
     private let loginButton: UIButton = {
@@ -40,6 +34,14 @@ class LoginController: UIViewController {
         button.backgroundColor = .systemRed
         button.setHeight(height: 50)
         return button
+    }()
+    
+    private let emailTextField = CustomTextField(placeholder: "Email")
+    
+    private let passwordTextField: UITextField = {
+        let tf = CustomTextField(placeholder: "Password")
+        tf.isSecureTextEntry = true
+        return tf
     }()
     
     // MARK: - Lifecycle
