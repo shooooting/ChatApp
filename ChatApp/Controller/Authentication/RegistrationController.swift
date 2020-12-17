@@ -22,7 +22,6 @@ class RegistrationController: UIViewController {
         button.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
         button.imageView?.contentMode = .scaleAspectFill
         button.clipsToBounds = true
-        button.imageView?.clipsToBounds = true
         return button
     }()
     
@@ -111,7 +110,7 @@ class RegistrationController: UIViewController {
             }
             
             ref.downloadURL { (url, error) in
-                guard let profileImageUrl = url?.absoluteURL else { return }
+                guard let profileImageUrl = url?.absoluteString else { return }
                 
                 Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
                     if let error = error {
@@ -132,7 +131,7 @@ class RegistrationController: UIViewController {
                             print("DEBUG: Failed to upload user data with error \(error.localizedDescription)")
                             return
                         }
-                        print("DEBUG: Did create user...")
+                        self.dismiss(animated: true, completion: nil)
                     }
                 }
             }
