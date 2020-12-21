@@ -143,7 +143,6 @@ class LoginController: UIViewController {
         
         emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
-
     }
 }
 

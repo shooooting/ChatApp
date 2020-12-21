@@ -86,7 +86,10 @@ class RegistrationController: UIViewController {
         
         configureUI()
         configureNotificationObservers()
-        
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+        self.view.endEditing(true)
     }
     
     // MARK: - Selector
@@ -102,8 +105,8 @@ class RegistrationController: UIViewController {
                                                   fullname: fullname, username: username,
                                                   profileImage: profileImage)
         showLoader(true, withText: "Signing You Up")
-        
-        AuthService.shared.createUser(creadentials: credentials) { (error) in
+                
+        AuthService.shared.createUser(creadentials: credentials) { error in
             if let error = error {
                 print("DEBUG: \(error.localizedDescription)")
                 self.showLoader(false)
@@ -146,7 +149,7 @@ class RegistrationController: UIViewController {
     
     @objc func keyboardWillHide() {
         if view.frame.origin.y != 0 {
-            self.view.frame.origin.y -= 0
+            self.view.frame.origin.y += 150
         }
     }
     
