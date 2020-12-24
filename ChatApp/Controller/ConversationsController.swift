@@ -18,7 +18,6 @@ class ConversationsController: UIViewController {
     
     private let newMessageButton: UIButton = {
         let button = UIButton(type: .system)
-        
         button.setImage(UIImage(systemName: "plus"), for: .normal)
         button.backgroundColor = .systemPurple
         button.tintColor = .white
@@ -40,6 +39,7 @@ class ConversationsController: UIViewController {
     
     @objc func showNewMeaage() {
         let controller = NewMessageController()
+        controller.delegate = self
         let nav = UINavigationController(rootViewController: controller)
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true, completion: nil)
@@ -121,5 +121,15 @@ extension ConversationsController: UITableViewDataSource {
 extension ConversationsController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
+    }
+}
+
+// MARK: - NewMessageControllerDelegate
+
+extension ConversationsController: NewMessageControllerDelegate {
+    func controller(_ controller: NewMessageController, wantsToStartChatWith user: User) {
+        controller.dismiss(animated: true, completion: nil)
+        let chat = ChatController(user: user)
+        navigationController?.pushViewController(chat, animated: true)
     }
 }
