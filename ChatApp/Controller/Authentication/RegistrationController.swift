@@ -208,7 +208,7 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
     }
 }
 
-extension RegistrationController:  AuthenticationControllerProtocol {
+extension RegistrationController: AuthenticationControllerProtocol {
     func checkFormStatus() {
         if viewModel.formIsValid {
             signUpButton.isEnabled = true

@@ -12,6 +12,13 @@ class ChatController: UICollectionViewController {
     // MARK: - Properties
     private let user: User
     
+    private lazy var customInputView: CustomInputAccessoryView = {
+        let iv = CustomInputAccessoryView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 50))
+        return iv
+    }()
+    
+    private lazy var 
+    
     // MARK: - Lifecycle
     init(user: User) {
         self.user = user
@@ -27,13 +34,21 @@ class ChatController: UICollectionViewController {
         
         configureUI()
         
-        print("DEBUG: \(user.username)")
     }
     
+    override var inputAccessoryView: UIView? {
+        get { return customInputView }
+    }
+    
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
     
     // MARK: - Helper
     
     func configureUI() {
         collectionView.backgroundColor = .white
+        configureNavigationBar(withTitle: user.username, prefersLargeTitles: false)
+
     }
 }
